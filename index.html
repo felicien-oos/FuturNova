@@ -1,291 +1,100 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FuturNova ULTRA - Interface Immersive</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
-<style>
-  /* RESET */
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-  body, html {
-    margin: 0; padding: 0; height: 100%;
-    background: radial-gradient(ellipse at center, #000010 0%, #0a001f 100%);
-    color: #00fff7;
-    font-family: 'Orbitron', monospace, sans-serif;
-    overflow-x: hidden;
-    user-select: none;
-  }
-
-  /* LOGO + HEADER */
-  header {
-    text-align: center;
-    padding: 1.5em 0 0.6em;
-    position: relative;
-    font-size: 3.5em;
-    color: #00fff7;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    filter: drop-shadow(0 0 20px #00fff7);
-    cursor: default;
-    user-select: none;
-  }
-
-  /* Glitch effect for header */
-  header span.glitch {
-    position: relative;
-    display: inline-block;
-    animation: flicker 3s infinite alternate;
-  }
-  header span.glitch::before,
-  header span.glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    left: 0; top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.15;
-  }
-  header span.glitch::before {
-    color: #00ffff;
-    animation: glitch1 2s infinite linear alternate-reverse;
-    clip-path: polygon(0 2%, 100% 0%, 100% 50%, 0 48%);
-  }
-  header span.glitch::after {
-    color: #ff00ff;
-    animation: glitch2 1.7s infinite linear alternate;
-    clip-path: polygon(0 50%, 100% 52%, 100% 100%, 0 100%);
-  }
-
-  @keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {opacity:1; filter: drop-shadow(0 0 25px #00fff7);}
-    20%, 22%, 24%, 55% {opacity: 0.4; filter: none;}
-  }
-  @keyframes glitch1 {
-    0% {transform: translate(0);}
-    20% {transform: translate(-2px, 2px);}
-    40% {transform: translate(-2px, -2px);}
-    60% {transform: translate(2px, 2px);}
-    80% {transform: translate(2px, -2px);}
-    100% {transform: translate(0);}
-  }
-  @keyframes glitch2 {
-    0% {transform: translate(0);}
-    20% {transform: translate(2px, -2px);}
-    40% {transform: translate(2px, 2px);}
-    60% {transform: translate(-2px, -2px);}
-    80% {transform: translate(-2px, 2px);}
-    100% {transform: translate(0);}
-  }
-
-  /* Logo SVG with glitch */
-  #logo {
-    width: 120px;
-    height: 120px;
-    margin: 0.5em auto 0.8em auto;
-    filter: drop-shadow(0 0 12px #00fff7);
-    animation: logoPulse 2.5s infinite ease-in-out alternate;
-    cursor: default;
-  }
-  @keyframes logoPulse {
-    0% { filter: drop-shadow(0 0 12px #00fff7); }
-    50% { filter: drop-shadow(0 0 30px #00fff7); }
-    100% { filter: drop-shadow(0 0 12px #00fff7); }
-  }
-
-  /* NAV BUTTONS GRID */
-  #nav-buttons {
-    max-width: 1200px;
-    margin: 0 auto 2.5em;
-    padding: 0 1em;
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
-    gap: 1.1em;
-  }
-  button.nav-btn {
-    background: linear-gradient(135deg, #00fff7 0%, #0099cc 90%);
-    border-radius: 1em;
-    border: none;
-    padding: 1em 0.5em;
-    font-weight: 700;
-    font-size: 1em;
-    color: #001122;
-    box-shadow:
-      0 0 8px #00fff7,
-      0 0 22px #00fff7,
-      inset 0 0 15px #00fff7;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    user-select: none;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-  button.nav-btn::before {
-    content: "";
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.3) 15%, transparent 50%);
-    opacity: 0;
-    pointer-events: none;
-    transform: rotate(45deg);
-    transition: opacity 0.4s ease;
-  }
-  button.nav-btn:hover {
-    color: #001122;
-    transform: scale(1.12);
-    box-shadow:
-      0 0 15px #00fff7,
-      0 0 40px #00fff7,
-      inset 0 0 25px #00fff7;
-  }
-  button.nav-btn:hover::before {
-    opacity: 1;
-  }
-  button.nav-btn:active {
-    transform: scale(1.05);
-  }
-
-  /* Special Buttons styling */
-  button.nav-btn.special {
-    background: linear-gradient(135deg, #ff00ff 0%, #cc0099 90%);
-    color: #fff;
-    box-shadow:
-      0 0 15px #ff00ff,
-      0 0 40px #ff00ff,
-      inset 0 0 30px #ff00ff;
-  }
-  button.nav-btn.special:hover {
-    box-shadow:
-      0 0 30px #ff00ff,
-      0 0 70px #ff00ff,
-      inset 0 0 45px #ff00ff;
-  }
-
-  /* MAIN CONTENT AREA */
-  main {
-    max-width: 900px;
-    margin: 0 auto 4em auto;
-    background: rgba(0, 255, 247, 0.05);
-    border-radius: 1.5em;
-    box-shadow:
-      0 0 15px #00fff7aa,
-      inset 0 0 25px #00fff7bb;
-    padding: 1.8em 2em 2em 2em;
-    min-height: 50vh;
-    color: #00fff7;
-    letter-spacing: 0.03em;
-  }
-  /* PAGE CONTAINER */
-  .page {
-    display: none;
-    animation: fadeIn 0.6s ease forwards;
-  }
-  .active-page {
-    display: block;
-  }
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-  }
-
-  /* Back button */
-  #back-home {
-    cursor: pointer;
-    display: inline-block;
-    margin-bottom: 1.2em;
-    font-weight: 700;
-    color: #00fff7;
-    text-decoration: underline;
-    letter-spacing: 0.15em;
-    user-select: none;
-  }
-  #back-home:hover {
-    color: #00ffff;
-  }
-
-  /* Scroll container for infinite ideas */
-  #ideas-container {
-    max-height: 420px;
-    overflow-y: auto;
-    padding: 1em;
-    background: rgba(0,255,255,0.12);
-    border-radius: 1em;
-    box-shadow: inset 0 0 15px #00fff7aa;
-    font-size: 1.1em;
-    line-height: 1.4em;
-  }
-  #ideas-container p {
-    margin: 0.6em 0;
-  }
-
-  /* Audio page controls */
-  #audio-controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
-  }
-  #audio-controls button {
-    flex: 1 1 140px;
-    background: #00fff7;
-    color: #001122;
-    border: none;
-    border-radius: 1em;
-    font-weight: 700;
-    cursor: pointer;
-    padding: 1em;
-    box-shadow:
-      0 0 12px #00fff7,
-      inset 0 0 20px #00fff7;
-    transition: background 0.3s ease;
-  }
-  #audio-controls button:disabled {
-    background: #004d55;
-    color: #00363d;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-  #audio-controls button:hover:not(:disabled) {
-    background: #00ffff;
-  }
-  audio {
-    margin-top: 1.5em;
-    width: 100%;
-    outline: none;
-  }
-
-  /* Wiki Search */
-  #wiki-search-container {
-    display: flex;
-    margin-top: 1em;
-    gap: 0.5em;
-  }
-  #wiki-search-container input[type="text"] {
-    flex-grow: 1;
-    padding: 0.7em 1em;
-    border-radius: 1em;
-    border: none;
-    font-family: 'Orbitron', monospace, sans-serif;
-    font-size: 1.1em;
-    letter-spacing: 0.03em;
-    background: rgba(0,255,255,0.1);
-    color: #00fff7;
-    box-shadow: inset 0 0 15px #00fff7aa;
-  }
-  #wiki-search-container input[type="text"]::placeholder {
-    color: #00fff799;
-  }
-  #wiki-search-container button {
-    background: #00fff7;
-    border: none;
-    border-radius: 1em;
-    padding: 0 1.2em;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow:
-      
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Futuriste</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(#0f0f2d, #000);
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      animation: glitch 1s infinite;
+    }
+    header img {
+      width: 100px;
+      animation: rotate 10s linear infinite;
+    }
+    h1 {
+      font-size: 2em;
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px;
+    }
+    button {
+      background: #0ff;
+      color: #000;
+      border: none;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.1);
+      background: #00f6ff;
+    }
+    @keyframes rotate {
+      from {transform: rotate(0deg);}
+      to {transform: rotate(360deg);}
+    }
+    @keyframes glitch {
+      0% {text-shadow: 2px 2px #f0f;}
+      20% {text-shadow: -2px 2px #0ff;}
+      40% {text-shadow: 2px -2px #f0f;}
+      60% {text-shadow: -2px -2px #0ff;}
+      80% {text-shadow: 0 0 #fff;}
+      100% {text-shadow: 2px 2px #f0f;}
+    }
+    .loader {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background: rgba(0,0,0,0.8);
+      font-size: 2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/OOjs_UI_icon_robot.svg/1024px-OOjs_UI_icon_robot.svg.png" alt="Logo">
+    <h1>Application Futuriste</h1>
+  </header>
+  <div class="buttons" id="button-container"></div>
+  <div class="loader" id="loader">Chargement...</div>
+  <script>
+    const container = document.getElementById('button-container');
+    const loader = document.getElementById('loader');
+    for (let i = 1; i <= 50; i++) {
+      const btn = document.createElement('button');
+      btn.innerText = `Fonctionnalité ${i}`;
+      btn.onclick = () => {
+        loader.style.display = 'flex';
+        setTimeout(() => {
+          window.location.href = `fonction${i}.html`;
+        }, 2000);
+      };
+      container.appendChild(btn);
+    }
+  </script>
+</body>
+</html>
 
