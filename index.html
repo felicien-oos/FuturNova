@@ -3,23 +3,19 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ULTIMATE FUTURISTIC 2.0 MAXI ULTRA X+ - Inscription</title>
+<title>Ultra Futuriste App - Inscription obligatoire</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-    user-select:none;
-  }
-  html, body {
-    height: 100%;
-    overflow: hidden;
-    font-family: 'Share Tech Mono', monospace;
+  body {
+    margin:0; height:100vh;
     background: linear-gradient(270deg, #001f44, #003366, #001f44);
     background-size: 600% 600%;
-    animation: bgGradient 25s ease infinite;
+    animation: bgGradient 20s ease infinite;
+    font-family: 'Orbitron', monospace;
     color: #00fff7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   @keyframes bgGradient {
     0%{background-position:0% 50%}
@@ -28,225 +24,204 @@
   }
 
   #app {
-    height: 100vh;
+    background: rgba(0,0,0,0.8);
+    border: 2px solid #00fff7;
+    border-radius: 20px;
+    box-shadow: 0 0 40px #00fff7;
+    width: 420px;
+    min-height: 320px;
+    padding: 20px 30px;
+    box-sizing: border-box;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  form, .page-content {
     display: flex;
     flex-direction: column;
-    backdrop-filter: saturate(180%) blur(12px);
-    background: rgba(0,0,0,0.3);
+    gap: 18px;
+  }
+
+  input[type="email"] {
+    padding: 12px 15px;
+    font-size: 1.1rem;
+    border-radius: 10px;
     border: 2px solid #00fff7;
-    border-radius: 24px;
-    margin: 20px auto;
-    max-width: 720px;
-    box-shadow: 0 0 50px #00fff7, inset 0 0 35px #00fff7;
-  }
-
-  header {
-    position: relative;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 3rem;
-    text-align: center;
-    padding: 25px 0;
+    background: transparent;
     color: #00fff7;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    filter: drop-shadow(0 0 10px #00fff7);
-    user-select:none;
-    overflow: visible;
+    outline: none;
+    transition: border-color 0.3s;
   }
-  header::before,
-  header::after {
-    content: attr(data-text);
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-    opacity: 0.6;
-    animation: glitch1 2s infinite linear;
-  }
-  header::after {
-    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-    animation: glitch2 2s infinite linear;
-  }
-  @keyframes glitch1 {
-    0%, 100% {transform: translateX(-50%) translate(0, 0);}
-    20% {transform: translateX(-50%) translate(-4px, -4px);}
-    40% {transform: translateX(-50%) translate(4px, 4px);}
-    60% {transform: translateX(-50%) translate(-4px, 4px);}
-    80% {transform: translateX(-50%) translate(4px, -4px);}
-  }
-  @keyframes glitch2 {
-    0%, 100% {transform: translateX(-50%) translate(0, 0);}
-    20% {transform: translateX(-50%) translate(4px, 4px);}
-    40% {transform: translateX(-50%) translate(-4px, -4px);}
-    60% {transform: translateX(-50%) translate(4px, -4px);}
-    80% {transform: translateX(-50%) translate(-4px, 4px);}
+  input[type="email"]:focus {
+    border-color: #ff00c8;
+    box-shadow: 0 0 15px #ff00c8;
   }
 
-  body::after {
-    content: "";
-    pointer-events: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background:
-      repeating-linear-gradient(
-        0deg,
-        rgba(0,255,247,0.05),
-        rgba(0,255,247,0.05) 2px,
-        transparent 3px,
-        transparent 4px
-      );
-    mix-blend-mode: overlay;
-    z-index: 1000;
+  button {
+    background: linear-gradient(135deg, #ff00c8, #00fff7);
+    border: none;
+    border-radius: 30px;
+    padding: 14px 0;
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #001f24;
+    cursor: pointer;
+    box-shadow: 0 0 30px #ff00c8, inset 0 0 45px #00fff7;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    user-select:none;
+  }
+  button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  button:hover:not(:disabled) {
+    box-shadow: 0 0 70px #ff00c8, inset 0 0 70px #00fff7;
+    transform: scale(1.05);
+  }
+  button:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  .error {
+    color: #ff00c8;
+    font-weight: 700;
+    text-align: center;
   }
 
   nav {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    background: rgba(0, 255, 247, 0.1);
-    padding: 15px 0;
-    border-bottom: 2px solid #00fff7;
+    gap: 30px;
+    margin-top: 10px;
   }
   nav button {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    font-size: 1.25rem;
-    padding: 15px 40px;
-    border-radius: 50px;
-    border: 2px solid #00fff7;
-    background: transparent;
-    color: #00fff7;
-    cursor: pointer;
+    width: 120px;
+    padding: 10px 0;
+    font-size: 1rem;
     text-transform: uppercase;
-    box-shadow: 0 0 10px #00fff7;
-    transition: all 0.3s ease-in-out;
-    position: relative;
-    overflow: hidden;
   }
-  nav button::before {
-    content: "";
-    position: absolute;
-    width: 0%;
-    height: 100%;
-    top: 0; left: 0;
-    background: linear-gradient(90deg, #ff00c8, #00fff7);
-    filter: blur(15px);
-    z-index: -1;
-    transition: width 0.4s ease;
-    border-radius: 50px;
-  }
-  nav button:hover::before,
-  nav button.active::before {
-    width: 100%;
-  }
-  nav button:hover,
   nav button.active {
-    color: #001f24;
-    box-shadow: 0 0 30px #ff00c8;
-  }
-
-  #pages {
-    flex-grow: 1;
-    position: relative;
-    padding: 25px 35px;
-    overflow: hidden;
-  }
-  .page {
-    position: absolute;
-    inset: 0;
-    background: #001f44cc;
-    border-radius: 20px;
-    box-shadow: inset 0 0 60px #00fff7, 0 0 30px #ff00c8;
-    padding: 30px;
-    color: #a0f9ff;
-    font-size: 1.15rem;
-    opacity: 0;
-    pointer-events: none;
-    transform-style: preserve-3d;
-    transform-origin: left center;
-    transition: 
-      opacity 0.7s ease, 
-      transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  }
-  .page.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateX(0) rotateY(0deg);
-  }
-  .page.exit-left {
-    opacity: 0;
-    transform: translateX(-100%) rotateY(40deg);
-    pointer-events: none;
-  }
-  .page.exit-right {
-    opacity: 0;
-    transform: translateX(100%) rotateY(-40deg);
-    pointer-events: none;
-  }
-
-  .btn-futuristic {
-    margin-top: 20px;
-    padding: 16px 42px;
-    border-radius: 40px;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 1.25rem;
-    background:
-      linear-gradient(135deg, #ff00c8, #00fff7);
-    color: #001f24;
-    box-shadow: 0 0 35px #ff00c8, inset 0 0 45px #00fff7;
-    border: none;
-    cursor: pointer;
-    user-select:none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  .btn-futuristic:hover {
-    box-shadow: 0 0 70px #ff00c8, inset 0 0 70px #00fff7;
-    transform: scale(1.07);
-  }
-  .btn-futuristic:active {
-    transform: scale(0.95);
-  }
-
-  ::-webkit-scrollbar {
-    width: 12px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
     background: #ff00c8;
-    border-radius: 20px;
-    box-shadow: 0 0 15px #ff00c8;
-  }
-
-  #clock {
-    font-family: 'Orbitron', monospace;
-    font-size: 3rem;
-    letter-spacing: 0.15em;
     color: #00fff7;
-    text-shadow:
-      0 0 7px #00fff7,
-      0 0 14px #00fff7,
-      0 0 28px #ff00c8,
-      0 0 42px #ff00c8;
-    user-select:none;
-    margin-top: 30px;
-    text-align: center;
+    box-shadow: 0 0 35px #ff00c8;
+  }
+</style>
+</head>
+<body>
+  <div id="app">
+    <!-- Page d'inscription -->
+    <div id="page-register" class="page active">
+      <h1>Inscription</h1>
+      <form id="registerForm" novalidate>
+        <input type="email" id="emailInput" placeholder="Votre adresse e-mail" required />
+        <div id="emailError" class="error" style="display:none;">Email invalide</div>
+        <button type="submit" id="registerBtn" disabled>S'inscrire</button>
+      </form>
+    </div>
+
+    <!-- Page 1 -->
+    <div id="page1" class="page" style="display:none;">
+      <h1>Page 1</h1>
+      <div class="page-content">
+        <p>Bienvenue dans la page 1 de l'application ultra futuriste.</p>
+      </div>
+      <nav>
+        <button id="toPage2">Aller à la Page 2</button>
+        <button id="toRegisterFrom1">Se déconnecter</button>
+      </nav>
+    </div>
+
+    <!-- Page 2 -->
+    <div id="page2" class="page" style="display:none;">
+      <h1>Page 2</h1>
+      <div class="page-content">
+        <p>Voici la page 2, futuriste et fonctionnelle à 100%.</p>
+      </div>
+      <nav>
+        <button id="toPage1From2">Retour à la Page 1</button>
+        <button id="toRegisterFrom2">Se déconnecter</button>
+      </nav>
+    </div>
+  </div>
+
+<script>
+  const emailInput = document.getElementById('emailInput');
+  const registerBtn = document.getElementById('registerBtn');
+  const emailError = document.getElementById('emailError');
+
+  const pageRegister = document.getElementById('page-register');
+  const page1 = document.getElementById('page1');
+  const page2 = document.getElementById('page2');
+
+  const toPage2Btn = document.getElementById('toPage2');
+  const toRegisterFrom1 = document.getElementById('toRegisterFrom1');
+  const toPage1From2 = document.getElementById('toPage1From2');
+  const toRegisterFrom2 = document.getElementById('toRegisterFrom2');
+
+  // Validation email simple regex
+  function isValidEmail(email) {
+    // Simple RFC 5322-ish regex
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  /* FORM INSCRIPTION */
-  form {
-    max-width: 480px;
-    margin: 40px auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+  // Écoute saisie email : active/désactive bouton
+  emailInput.addEventListener('input', () => {
+    if (isValidEmail(emailInput.value.trim())) {
+      emailError.style.display = 'none';
+      registerBtn.disabled = false;
+    } else {
+      registerBtn.disabled = true;
+    }
+  });
+
+  // Soumission formulaire inscription
+  document.getElementById('registerForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    if (!isValidEmail(email)) {
+      emailError.style.display = 'block';
+      return;
+    }
+    emailError.style.display = 'none';
+    goToPage(1);
+  });
+
+  // Navigation pages
+  function goToPage(pageNum) {
+    // Cacher toutes les pages
+    pageRegister.style.display = 'none';
+    page1.style.display = 'none';
+    page2.style.display = 'none';
+
+    if (pageNum === 0) {
+      pageRegister.style.display = 'block';
+      emailInput.value = '';
+      registerBtn.disabled = true;
+    }
+    else if (pageNum === 1) {
+      page1.style.display = 'block';
+    }
+    else if (pageNum === 2) {
+      page2.style.display = 'block';
+    }
   }
-  label {
-    font-size
+
+  toPage2Btn.addEventListener('click', () => goToPage(2));
+  toPage1From2.addEventListener('click', () => goToPage(1));
+  toRegisterFrom1.addEventListener('click', () => goToPage(0));
+  toRegisterFrom2.addEventListener('click', () => goToPage(0));
+
+  // Démarrage sur page inscription
+  goToPage(0);
+</script>
+</body>
+</html>
 
