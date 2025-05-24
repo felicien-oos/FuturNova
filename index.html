@@ -1,100 +1,243 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Application Futuriste</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      background: radial-gradient(#0f0f2d, #000);
-      font-family: 'Orbitron', sans-serif;
-      color: white;
-      overflow-x: hidden;
-    }
-    header {
-      text-align: center;
-      padding: 20px;
-      animation: glitch 1s infinite;
-    }
-    header img {
-      width: 100px;
-      animation: rotate 10s linear infinite;
-    }
-    h1 {
-      font-size: 2em;
-      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
-    }
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 20px;
-    }
-    button {
-      background: #0ff;
-      color: #000;
-      border: none;
-      padding: 15px;
-      border-radius: 10px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    button:hover {
-      transform: scale(1.1);
-      background: #00f6ff;
-    }
-    @keyframes rotate {
-      from {transform: rotate(0deg);}
-      to {transform: rotate(360deg);}
-    }
-    @keyframes glitch {
-      0% {text-shadow: 2px 2px #f0f;}
-      20% {text-shadow: -2px 2px #0ff;}
-      40% {text-shadow: 2px -2px #f0f;}
-      60% {text-shadow: -2px -2px #0ff;}
-      80% {text-shadow: 0 0 #fff;}
-      100% {text-shadow: 2px 2px #f0f;}
-    }
-    .loader {
-      display: none;
-      justify-content: center;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 100vw;
-      background: rgba(0,0,0,0.8);
-      font-size: 2em;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/OOjs_UI_icon_robot.svg/1024px-OOjs_UI_icon_robot.svg.png" alt="Logo">
-    <h1>Application Futuriste</h1>
-  </header>
-  <div class="buttons" id="button-container"></div>
-  <div class="loader" id="loader">Chargement...</div>
-  <script>
-    const container = document.getElementById('button-container');
-    const loader = document.getElementById('loader');
-    for (let i = 1; i <= 50; i++) {
-      const btn = document.createElement('button');
-      btn.innerText = `Fonctionnalité ${i}`;
-      btn.onclick = () => {
-        loader.style.display = 'flex';
-        setTimeout(() => {
-          window.location.href = `fonction${i}.html`;
-        }, 2000);
-      };
-      container.appendChild(btn);
-    }
-  </script>
-</body>
-</html>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>App Futuriste 100000000000000000000%</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+<style>
+  /* === Reset & base === */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box; user-select:none;
+  }
+  body {
+    background: radial-gradient(circle at center, #001020 0%, #000003 90%);
+    color: #0ff;
+    font-family: 'Orbitron', monospace, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center;
+    background-blend-mode: screen;
+  }
+  /* === Glitch Title === */
+  header {
+    margin: 25px 0 10px;
+    font-size: 3.5rem;
+    position: relative;
+    color: #0ff;
+    animation: glitch 2s infinite;
+    text-align: center;
+  }
+  header::before, header::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    width: 100%;
+    opacity: 0.7;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  }
+  header::before {
+    animation: glitchTop 2s infinite;
+    color: #f0f;
+    top: 2px;
+    text-shadow: 2px -2px #f0f;
+  }
+  header::after {
+    animation: glitchBot 2s infinite;
+    color: #0ff;
+    top: -2px;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    text-shadow: -2px 2px #0ff;
+  }
+  @keyframes glitch {
+    0%, 100% {color: #0ff;}
+    50% {color: #f0f;}
+  }
+  @keyframes glitchTop {
+    0%, 100% {transform: translate(0);}
+    20% {transform: translate(-3px, -3px);}
+    40% {transform: translate(3px, 3px);}
+    60% {transform: translate(-3px, 3px);}
+    80% {transform: translate(3px, -3px);}
+  }
+  @keyframes glitchBot {
+    0%, 100% {transform: translate(0);}
+    20% {transform: translate(3px, 3px);}
+    40% {transform: translate(-3px, -3px);}
+    60% {transform: translate(3px, -3px);}
+    80% {transform: translate(-3px, 3px);}
+  }
+
+  /* === Logo animated glitch === */
+  #logo {
+    width: 120px;
+    margin: 0 auto 15px;
+    animation: rotate360 15s linear infinite, glitchLogo 3s infinite;
+    filter: drop-shadow(0 0 6px #0ff);
+    cursor: default;
+  }
+  @keyframes rotate360 {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+  }
+  @keyframes glitchLogo {
+    0%, 100% {filter: drop-shadow(0 0 6px #0ff);}
+    50% {filter: drop-shadow(2px 2px 10px #f0f);}
+  }
+
+  /* === Buttons container === */
+  #button-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    width: 90vw;
+    max-width: 1200px;
+    margin-bottom: 40px;
+  }
+  button.func-btn {
+    background: linear-gradient(135deg, #0ff, #0aa);
+    border: none;
+    border-radius: 12px;
+    padding: 18px 12px;
+    color: #002222;
+    font-weight: 700;
+    font-size: 1rem;
+    text-shadow: 0 0 4px #004;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 0 15px #0ff, inset 0 0 8px #08f;
+    position: relative;
+    overflow: hidden;
+  }
+  button.func-btn:hover {
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 0 30px #0ff, inset 0 0 15px #0ff;
+  }
+  button.func-btn:active {
+    transform: scale(0.95);
+  }
+  button.func-btn .glitch-text {
+    position: relative;
+    display: inline-block;
+    color: #002222;
+    mix-blend-mode: difference;
+  }
+  button.func-btn .glitch-text::before,
+  button.func-btn .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%;
+    opacity: 0.8;
+    color: #0ff;
+    mix-blend-mode: screen;
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+  }
+  button.func-btn .glitch-text::after {
+    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+  }
+
+  /* === Loader overlay === */
+  #loader {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    color: #0ff;
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 5px;
+    text-align: center;
+    line-height: 100vh;
+    font-family: 'Orbitron', monospace;
+    z-index: 9999;
+    user-select:none;
+    text-shadow: 0 0 15px #0ff;
+  }
+  #loader span {
+    animation: blink 1.2s infinite;
+  }
+  @keyframes blink {
+    0%, 100% {opacity: 1;}
+    50% {opacity: 0;}
+  }
+
+  /* === Main content area === */
+  #content {
+    width: 90vw;
+    max-width: 900px;
+    background: rgba(0,20,40,0.8);
+    border-radius: 20px;
+    padding: 25px 30px;
+    box-shadow: 0 0 35px #0ff;
+    min-height: 300px;
+    color: #aaffff;
+    font-size: 1.1rem;
+    overflow-y: auto;
+    user-select: text;
+  }
+  #content h2 {
+    margin-bottom: 15px;
+    font-size: 2rem;
+    text-align: center;
+    color: #0ff;
+    text-shadow: 0 0 15px #0ff;
+  }
+  #content p, #content ul {
+    margin-bottom: 15px;
+  }
+  #content ul {
+    list-style: none;
+  }
+  #content ul li {
+    padding: 6px 0;
+    border-bottom: 1px dotted #0ff;
+  }
+
+  /* === Input & controls === */
+  input, textarea, select {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    background: #001a33;
+    border: 2px solid #0ff;
+    border-radius: 8px;
+    color: #0ff;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    transition: border-color 0.3s;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #f0f;
+  }
+  button.small {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+    width: auto;
+    background: #0ff;
+    color: #001a33;
+    font-weight: 700;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  button.small:hover {
+    background: #f0f;
+  }
+
+  /* === Scrollbar futuristic === */
+  #content::-webkit-scrollbar {
+    width: 12px;
+  }
+  #content::-webkit-scrollbar-track {
+    background: #001a33;
+    border-radius: 10px;
+  }
+  #content::-webkit-scrollbar-thumb {
+    background: #0ff;
+    border-radius: 10px;
+    box-shadow: 0
 
