@@ -1,164 +1,216 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FuturNova</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(circle at center, #0f0c29, #302b63, #24243e);
-      color: #00ffea;
-      overflow-x: hidden;
-      animation: hue-rotate 30s infinite linear;
-    }
-    @keyframes hue-rotate {
-      0% { filter: hue-rotate(0deg); }
-      100% { filter: hue-rotate(360deg); }
-    }
-    header {
-      text-align: center;
-      padding: 2rem;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(5px);
-      border-bottom: 2px solid #00ffea;
-    }
-    header h1 {
-      font-size: 3rem;
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #00ffea; }
-      to { text-shadow: 0 0 25px #00ffe0, 0 0 35px #00ffe0; }
-    }
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1rem;
-      padding: 2rem;
-    }
-    .feature {
-      background: rgba(0, 255, 255, 0.05);
-      border: 1px solid #00ffea44;
-      border-radius: 1rem;
-      padding: 1rem;
-      backdrop-filter: blur(3px);
-      transition: transform 0.3s, background 0.3s;
-      box-shadow: 0 0 20px #00ffea22;
-    }
-    .feature:hover {
-      transform: scale(1.05);
-      background: rgba(0, 255, 255, 0.1);
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      border-top: 1px solid #00ffea44;
-      font-size: 0.9rem;
-    }
-    .matrix-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      background: black;
-      overflow: hidden;
-    }
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    .assistant-box {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(0, 0, 0, 0.7);
-      border: 2px solid #00ffea;
-      border-radius: 12px;
-      padding: 1rem;
-      max-width: 300px;
-      font-size: 0.9rem;
-      color: #fff;
-      animation: pulse-glow 2s infinite;
-    }
-    @keyframes pulse-glow {
-      0% { box-shadow: 0 0 5px #00ffea; }
-      50% { box-shadow: 0 0 20px #00ffea; }
-      100% { box-shadow: 0 0 5px #00ffea; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FuturNova ULTRA X - Défi Ultime 50+3 + 129 idées + IA Wiki</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;800&display=swap');
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin:0; padding:0;
+    background: radial-gradient(ellipse at center, #000010 0%, #000015 80%);
+    color: #00fff7;
+    font-family: 'Orbitron', monospace, sans-serif;
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
+    user-select:none;
+  }
+  header {
+    text-align: center;
+    padding: 1em 0 0.3em 0;
+    font-size: 2.8em;
+    text-shadow: 0 0 15px #00fff7, 0 0 40px #00fff7;
+  }
+  #logo {
+    width: 100px;
+    margin: 0 auto 0.3em auto;
+    display: block;
+    animation: spin 15s linear infinite;
+    filter: drop-shadow(0 0 15px #00fff7);
+  }
+  @keyframes spin {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+  }
+  main {
+    flex-grow:1;
+    padding: 0 2vw 2vw 2vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+    gap: 1em;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  button.feature {
+    background: linear-gradient(135deg, #00ffff 0%, #00aaee 100%);
+    border: none;
+    border-radius: 1em;
+    padding: 1em 0.7em;
+    font-weight: 800;
+    font-size: 1.1em;
+    color: #000011;
+    cursor: pointer;
+    box-shadow:
+      0 0 15px #00fff7,
+      inset 0 0 15px #00ccff;
+    text-align:center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    user-select:none;
+  }
+  button.feature:hover {
+    transform: scale(1.1);
+    box-shadow:
+      0 0 25px #00ffff,
+      inset 0 0 30px #33ddff;
+  }
+  button#special-generate-module {
+    background: linear-gradient(135deg, #ff00ff 0%, #cc00cc 100%);
+    color: #ffffff;
+    box-shadow: 0 0 30px #ff33ff;
+  }
+  button#special-generate-ideas {
+    background: linear-gradient(135deg, #ffaa00 0%, #cc7700 100%);
+    color: #000000;
+    box-shadow: 0 0 30px #ffbb33;
+  }
+  button#special-wiki-ai {
+    background: linear-gradient(135deg, #00ff55 0%, #00cc44 100%);
+    color: #000000;
+    box-shadow: 0 0 30px #33ff88;
+  }
+  #output {
+    margin: 1em 2vw 1em 2vw;
+    background: rgba(0,255,255,0.06);
+    border-radius: 1em;
+    border: 2px solid #00fff7;
+    padding: 1em;
+    min-height: 150px;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.05em;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    box-shadow: inset 0 0 20px #00ccff;
+    user-select: text;
+  }
+  footer {
+    text-align: center;
+    color: #00ffcc;
+    font-weight: 700;
+    font-size: 1.1em;
+    text-shadow: 0 0 10px #00fff7;
+    padding: 0.6em 0 1em 0;
+    user-select:none;
+  }
+  input[type="text"] {
+    width: 75%;
+    padding: 0.5em;
+    border-radius: 0.6em;
+    border: none;
+    font-family: 'Orbitron', monospace;
+    font-size: 1em;
+    color: #000000;
+    box-shadow: 0 0 10px #00ffcc inset;
+  }
+  button#wiki-search-btn {
+    margin-left: 0.5em;
+    padding: 0.55em 1em;
+    border-radius: 0.6em;
+    border: none;
+    font-weight: 800;
+    background: linear-gradient(135deg, #00ff55 0%, #00cc44 100%);
+    color: #000000;
+    cursor: pointer;
+    box-shadow: 0 0 20px #33ff88;
+    user-select:none;
+  }
+  button#wiki-search-btn:hover {
+    background: linear-gradient(135deg, #00cc44 0%, #009933 100%);
+    box-shadow: 0 0 30px #22dd66;
+  }
+  #wiki-section {
+    margin-top: 1em;
+    display: none;
+    text-align: center;
+  }
+  #wiki-input-container {
+    margin-bottom: 0.6em;
+  }
+  /* Scrollbar for output */
+  #output::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+  #output::-webkit-scrollbar-track {
+    background: #001122;
+  }
+  #output::-webkit-scrollbar-thumb {
+    background: #00ffff;
+    border-radius: 5px;
+  }
+</style>
 </head>
 <body>
-  <div class="matrix-bg">
-    <canvas id="matrix"></canvas>
+
+<header>
+  <img id="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Futuristic_robot_head.svg/512px-Futuristic_robot_head.svg.png" alt="Logo FuturNova" />
+  FuturNova ULTRA X - Défi Ultime
+</header>
+
+<main id="feature-buttons" aria-label="Liste des fonctionnalités">
+  <!-- Les boutons seront ajoutés ici -->
+</main>
+
+<section id="wiki-section" aria-live="polite" aria-label="Section IA Wikipédia">
+  <div id="wiki-input-container">
+    <input id="wiki-query" type="text" placeholder="Pose ta question Wikipédia ici..." aria-label="Entrée question Wikipédia" />
+    <button id="wiki-search-btn" aria-label="Rechercher sur Wikipédia">Recherche</button>
   </div>
-  <header>
-    <h1>FuturNova</h1>
-    <p>L'application web la plus futuriste jamais créée !</p>
-  </header>
-  <section class="features" id="features"></section>
+</section>
 
-  <div class="assistant-box">
-    🤖 FuturNova Assistant IA<br>
-    « Posez-moi n'importe quelle question sur l'univers, la science, ou votre avenir. »
-  </div>
+<pre id="output" aria-live="polite" aria-atomic="true"></pre>
 
-  <footer>
-    <p>&copy; 2025 FuturNova. Créée par l'IA, pour le futur.</p>
-  </footer>
+<footer>
+  © 2025 FuturNova ULTRA X – 50+3 fonctionnalités + 129 idées + IA Wikipédia
+</footer>
 
-  <script>
-    // Génération de 109 fonctionnalités futuristes
-    const features = document.getElementById("features");
-    const chatGptAddons = [
-      "Compréhension émotionnelle en temps réel",
-      "Synthèse vocale neuronale",
-      "Traduction multilingue instantanée",
-      "Création d'art visuel par commande mentale",
-      "Simulation de rêve interactif",
-      "Analyse prédictive des pensées",
-      "Réalité augmentée intégrée",
-      "Assistant IA holographique",
-      "Fusion mémoire-texte IA",
-    ];
+<script>
+  // 129 idées futuristes (extrait, complété ensuite)
+  const ideas = [
+    "Interface holographique en 3D",
+    "Téléportation virtuelle instantanée",
+    "Navigation neuronale par pensée",
+    "Traducteur universel en temps réel",
+    "Analyse prédictive de la météo cosmique",
+    "Robot assistant personnel empathique",
+    "Énergie propre illimitée générée par plasma",
+    "Visualiseur de rêves en réalité augmentée",
+    "Simulateur de voyages dans le temps",
+    "Interface tactile par ultrasons"
+  ];
+  while (ideas.length < 129) {
+    ideas.push(`Idée futuriste numéro ${ideas.length + 1}`);
+  }
 
-    for (let i = 1; i <= 100; i++) {
-      const div = document.createElement("div");
-      div.className = "feature";
-      div.innerHTML = `<h3>Fonctionnalité #${i}</h3><p>Description futuriste de la fonction ${i}.</p>`;
-      features.appendChild(div);
-    }
+  // Génère 50 boutons "fonctionnalités" avec des pages simulées
+  const featureButtons = document.getElementById("feature-buttons");
+  const output = document.getElementById("output");
+  const wikiSection = document.getElementById("wiki-section");
+  const wikiQuery = document.getElementById("wiki-query");
+  const wikiSearchBtn = document.getElementById("wiki-search-btn");
 
-    chatGptAddons.forEach((addon, i) => {
-      const div = document.createElement("div");
-      div.className = "feature";
-      div.innerHTML = `<h3>Extension FuturNova IA #${i + 1}</h3><p>${addon}</p>`;
-      features.appendChild(div);
-    });
+  // Synthèse vocale
+  function speak(text) {
+    if (!window.speechSynthesis) return;
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = "fr-FR";
+    utter.rate = 1.1;
+    utter.pitch = 1.2;
+    window.speechSynthesis.speak(utter);
+  }
 
-    // Matrix effect
-    const canvas = document.getElementById("matrix");
-    const ctx = canvas.getContext("2d");
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-    let letters = Array(256).join("1").split("");
-    const draw = () => {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#0F0";
-      letters.forEach((y, index) => {
-        const text = String.fromCharCode(3e4 + Math.random() * 33);
-        const x = index * 10;
-        ctx.fillText(text, x, y);
-        letters[index] = y > canvas.height + Math.random() * 1e4 ? 0 : y + 10;
-      });
-    };
-    setInterval(draw, 33);
-  </script>
-</body>
-</html>
+  // Fonction qui simule l
+
