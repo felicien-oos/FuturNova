@@ -1,227 +1,158 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ultra Futuriste App - Inscription obligatoire</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap');
-  body {
-    margin:0; height:100vh;
-    background: linear-gradient(270deg, #001f44, #003366, #001f44);
-    background-size: 600% 600%;
-    animation: bgGradient 20s ease infinite;
-    font-family: 'Orbitron', monospace;
-    color: #00fff7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  @keyframes bgGradient {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plagg - Générateurs Futuristes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle at center, #0a0a1a, #050510);
+      font-family: 'Orbitron', sans-serif;
+      color: #0ff;
+      overflow-x: hidden;
+    }
 
-  #app {
-    background: rgba(0,0,0,0.8);
-    border: 2px solid #00fff7;
-    border-radius: 20px;
-    box-shadow: 0 0 40px #00fff7;
-    width: 420px;
-    min-height: 320px;
-    padding: 20px 30px;
-    box-sizing: border-box;
-  }
+    .neon-bar {
+      height: 5px;
+      background: linear-gradient(90deg, #0ff, #0f0, #f0f, #0ff);
+      background-size: 400% 100%;
+      animation: neonMove 6s linear infinite;
+    }
 
-  h1 {
-    font-size: 2.2rem;
-    text-align: center;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-  }
+    @keyframes neonMove {
+      0% { background-position: 0% 0; }
+      100% { background-position: 400% 0; }
+    }
 
-  form, .page-content {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 30px;
+      text-align: center;
+    }
 
-  input[type="email"] {
-    padding: 12px 15px;
-    font-size: 1.1rem;
-    border-radius: 10px;
-    border: 2px solid #00fff7;
-    background: transparent;
-    color: #00fff7;
-    outline: none;
-    transition: border-color 0.3s;
-  }
-  input[type="email"]:focus {
-    border-color: #ff00c8;
-    box-shadow: 0 0 15px #ff00c8;
-  }
+    h1 {
+      font-size: 3rem;
+      color: #0ff;
+      text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
+      margin-top: 40px;
+    }
 
-  button {
-    background: linear-gradient(135deg, #ff00c8, #00fff7);
-    border: none;
-    border-radius: 30px;
-    padding: 14px 0;
-    font-family: 'Orbitron', monospace;
-    font-weight: 900;
-    font-size: 1.2rem;
-    color: #001f24;
-    cursor: pointer;
-    box-shadow: 0 0 30px #ff00c8, inset 0 0 45px #00fff7;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    user-select:none;
-  }
-  button:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-  button:hover:not(:disabled) {
-    box-shadow: 0 0 70px #ff00c8, inset 0 0 70px #00fff7;
-    transform: scale(1.05);
-  }
-  button:active:not(:disabled) {
-    transform: scale(0.95);
-  }
+    .clock {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 1.2rem;
+      color: #0f0;
+      text-shadow: 0 0 10px #0f0;
+    }
 
-  .error {
-    color: #ff00c8;
-    font-weight: 700;
-    text-align: center;
-  }
+    .button {
+      background: transparent;
+      border: 2px solid #0ff;
+      color: #0ff;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 15px #0ff, 0 0 30px #0ff inset;
+      transition: 0.3s ease;
+    }
 
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 10px;
-  }
-  nav button {
-    width: 120px;
-    padding: 10px 0;
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
-  nav button.active {
-    background: #ff00c8;
-    color: #00fff7;
-    box-shadow: 0 0 35px #ff00c8;
-  }
-</style>
+    .button:hover {
+      background: #0ff;
+      color: #000;
+      box-shadow: 0 0 25px #0ff, 0 0 50px #0ff inset;
+    }
+
+    .section {
+      display: none;
+      margin-top: 30px;
+      max-width: 600px;
+    }
+
+    .output {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: rgba(0,255,255,0.1);
+      border: 1px solid #0ff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #0ff inset;
+    }
+  </style>
 </head>
 <body>
-  <div id="app">
-    <!-- Page d'inscription -->
-    <div id="page-register" class="page active">
-      <h1>Inscription</h1>
-      <form id="registerForm" novalidate>
-        <input type="email" id="emailInput" placeholder="Votre adresse e-mail" required />
-        <div id="emailError" class="error" style="display:none;">Email invalide</div>
-        <button type="submit" id="registerBtn" disabled>S'inscrire</button>
-      </form>
+  <div class="neon-bar"></div>
+  <div class="clock" id="clock"></div>
+
+  <div class="container">
+    <h1>Plagg - Générateurs Futuristes</h1>
+
+    <button class="button" onclick="showSection('blague')">Générateur de Blagues</button>
+    <button class="button" onclick="showSection('slogan')">Générateur de Slogans</button>
+
+    <div class="section" id="blague-section">
+      <h2>Voici ta blague :</h2>
+      <div class="output" id="blague-output"></div>
+      <button class="button" onclick="generateBlague()">Nouvelle Blague</button>
     </div>
 
-    <!-- Page 1 -->
-    <div id="page1" class="page" style="display:none;">
-      <h1>Page 1</h1>
-      <div class="page-content">
-        <p>Bienvenue dans la page 1 de l'application ultra futuriste.</p>
-      </div>
-      <nav>
-        <button id="toPage2">Aller à la Page 2</button>
-        <button id="toRegisterFrom1">Se déconnecter</button>
-      </nav>
-    </div>
-
-    <!-- Page 2 -->
-    <div id="page2" class="page" style="display:none;">
-      <h1>Page 2</h1>
-      <div class="page-content">
-        <p>Voici la page 2, futuriste et fonctionnelle à 100%.</p>
-      </div>
-      <nav>
-        <button id="toPage1From2">Retour à la Page 1</button>
-        <button id="toRegisterFrom2">Se déconnecter</button>
-      </nav>
+    <div class="section" id="slogan-section">
+      <h2>Voici ton slogan :</h2>
+      <div class="output" id="slogan-output"></div>
+      <button class="button" onclick="generateSlogan()">Nouveau Slogan</button>
     </div>
   </div>
 
-<script>
-  const emailInput = document.getElementById('emailInput');
-  const registerBtn = document.getElementById('registerBtn');
-  const emailError = document.getElementById('emailError');
+  <script>
+    const blagues = [
+      "Pourquoi les poissons détestent l’ordinateur ? Parce qu’ils ont peur du net.",
+      "Pourquoi les plongeurs plongent-ils toujours en arrière et jamais en avant ? Parce que sinon ils tombent dans le bateau.",
+      "C’est l’histoire d’un pingouin qui respirait par les fesses. Un jour il s’assoit et il meurt.",
+      "Pourquoi Kevin a eu 0 en math ? Parce qu’il a dit que 1 + 1 = fenêtre."
+    ];
 
-  const pageRegister = document.getElementById('page-register');
-  const page1 = document.getElementById('page1');
-  const page2 = document.getElementById('page2');
+    const slogans = [
+      "FlexUp : ta créativité, ta puissance.",
+      "NovaSearch : explore l’univers à ta façon.",
+      "InfoNova : toutes les réponses, une seule voix.",
+      "Plagg : futur activé, idée libérée."
+    ];
 
-  const toPage2Btn = document.getElementById('toPage2');
-  const toRegisterFrom1 = document.getElementById('toRegisterFrom1');
-  const toPage1From2 = document.getElementById('toPage1From2');
-  const toRegisterFrom2 = document.getElementById('toRegisterFrom2');
-
-  // Validation email simple regex
-  function isValidEmail(email) {
-    // Simple RFC 5322-ish regex
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  // Écoute saisie email : active/désactive bouton
-  emailInput.addEventListener('input', () => {
-    if (isValidEmail(emailInput.value.trim())) {
-      emailError.style.display = 'none';
-      registerBtn.disabled = false;
-    } else {
-      registerBtn.disabled = true;
+    function showSection(type) {
+      document.getElementById("blague-section").style.display = type === "blague" ? "block" : "none";
+      document.getElementById("slogan-section").style.display = type === "slogan" ? "block" : "none";
+      if (type === "blague") generateBlague();
+      if (type === "slogan") generateSlogan();
     }
-  });
 
-  // Soumission formulaire inscription
-  document.getElementById('registerForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const email = emailInput.value.trim();
-    if (!isValidEmail(email)) {
-      emailError.style.display = 'block';
-      return;
+    function generateBlague() {
+      const random = blagues[Math.floor(Math.random() * blagues.length)];
+      document.getElementById("blague-output").textContent = random;
     }
-    emailError.style.display = 'none';
-    goToPage(1);
-  });
 
-  // Navigation pages
-  function goToPage(pageNum) {
-    // Cacher toutes les pages
-    pageRegister.style.display = 'none';
-    page1.style.display = 'none';
-    page2.style.display = 'none';
-
-    if (pageNum === 0) {
-      pageRegister.style.display = 'block';
-      emailInput.value = '';
-      registerBtn.disabled = true;
+    function generateSlogan() {
+      const random = slogans[Math.floor(Math.random() * slogans.length)];
+      document.getElementById("slogan-output").textContent = random;
     }
-    else if (pageNum === 1) {
-      page1.style.display = 'block';
-    }
-    else if (pageNum === 2) {
-      page2.style.display = 'block';
-    }
-  }
 
-  toPage2Btn.addEventListener('click', () => goToPage(2));
-  toPage1From2.addEventListener('click', () => goToPage(1));
-  toRegisterFrom1.addEventListener('click', () => goToPage(0));
-  toRegisterFrom2.addEventListener('click', () => goToPage(0));
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString('fr-FR');
+      document.getElementById('clock').textContent = time;
+    }
 
-  // Démarrage sur page inscription
-  goToPage(0);
-</script>
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
 </body>
 </html>
+
+
 
